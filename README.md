@@ -1,2 +1,2 @@
-# CS470-web
+# CS471-web
 For course CS471
