@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Book
 
 def index(request):
  return render(request, "bookmodule/index.html")
@@ -40,6 +41,16 @@ def search(request):
     return render(request, 'bookmodule/bookList.html', {'books':newBooks})
  return render(request, 'bookmodule/search.html')
 
+def simple_query(request):
+    mybooks=Book.objects.filter(title__icontains='and')
+    return render(request,'bookmodule/bookList.html', {"books":mybooks})
+
+def lookup_query(request):
+    mybooks=Book.objects.filter(author__isnull=False).filter(title__icontains='and').exclude(price__lte=100.00) [:10]
+    if len(mybooks) >=1:
+        return render(request,'bookmodule./bookList.html',{'books':mybooks})
+    else:
+        return render(request,"bookmodule/index.html")
 
 def __getBooksList():
  book1 = {'id':12344321, 'title':'Continuous Delivery', 'author':'J.Humble and D. Farley'}
