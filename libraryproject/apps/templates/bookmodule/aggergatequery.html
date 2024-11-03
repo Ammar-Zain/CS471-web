@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Book list {% endblock title %}
+</head>
+<body>
+{% block content %}
+    <h1>Book List - {{title}}</h1>
+    <h2>number of Books: {{NoB}}</h2>
+    <h2>total price of all books: {{query.total_price}}</h2>
+    <h2>average price of all books: {{query.average_price|floatformat:2}}</h2>
+    <h2>maximum price of all books: {{query.maximum_price}}</h2>
+    <h2>minimumm price of all books: {{query.minimumm_price}}</h2>
+{% endblock content %}
+</body>
+</html>

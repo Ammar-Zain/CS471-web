@@ -6,7 +6,7 @@
 </head>
 <body>
 {% block content %}
-    <h1>Book List</h1>
+    <h1>Book List - {{title}}</h1>
     {% if books %}
         <ul>
         {% for book in books %}

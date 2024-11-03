@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Student list {% endblock title %}
+</head>
+<body>
+{% block content %}
+    <h1>Student list by city</h1>
+    <table>
+        <tr>
+            <th>City</th>
+            <th>Number of Students</th>
+        </tr>
+        {% for city in cities %}
+            <tr>
+                <td>{{ city.address }}</td>
+                <td>{{ city.student_count }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}
+</body>
+</html>
