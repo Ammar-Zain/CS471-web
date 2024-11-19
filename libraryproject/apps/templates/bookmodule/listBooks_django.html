@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Book list {% endblock title %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+{% block stylesheets %} <link rel="stylesheet" href="{% static 'lab9_style.css' %}"> {% endblock %}
+</head>
+<body>
+{% block content %}
+    <a href="{% url 'books.l9p2t2' %}" class="linkadd" target="_self" ><h1>add a new book</h1></a>
+    {% if books %}
+        <ul>
+        {% for book in books %}
+            <li>
+                <a href="{% url 'books.showsinglebook' Id=book.id %}" ><h2>{{ book.title }}</h2></a>
+                <p>Author: {{ book.author }}</p>
+                <p>ID: {{ book.id }}</p>
+                <p>edition: {{book.edition}}</p>
+                <p>Price: {{book.price}}</p>
+                <a href="{% url 'books.l9p2t3' Id=book.id %}" class="linkedit"> edit book details </a>
+                <br> <br>
+                <a href="{% url 'books.l9p2t4' Id=book.id %}" class="linkdelete"> delete book </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books found.</p>
+    {% endif %}
+{% endblock content %}
+</body>
+</html>

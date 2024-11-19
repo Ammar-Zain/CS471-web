@@ -1,0 +1,18 @@
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} edit book {% endblock title %}
+</head>
+
+<body>
+{% block content %}
+<h3>Editing a Book</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">update Book</button>
+</form>
+{% endblock content %}
+</body>
+</html>

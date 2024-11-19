@@ -1,0 +1,37 @@
+.linkadd {
+    color: blue;
+    /* remove underline */
+    text-decoration: none;
+}
+.linkadd:visited {
+    color: blue;
+}
+.linkadd:hover {
+    color: blue;
+}
+
+.linkedit {
+    color: green;
+    background-color: lightgray;
+    padding: 10px;
+    text-decoration: none;
+}
+.linkedit:visited {
+    color: green;
+}
+.linkedit:hover {
+    color: green;
+}
+
+.linkdelete {
+    color: red;
+    background-color: lightblue;
+    padding: 10px;
+    text-decoration: none;
+}
+.linkdelete:visited {
+    color: red;
+}
+.linkdelete:hover {
+    color: red;
+}

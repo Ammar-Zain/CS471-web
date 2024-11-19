@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} edit book {% endblock title %}
+</head>
+
+<body>
+{% block content %}
+<h1>Editing a Book</h1>
+<h3>current book details:</h3>
+<table>
+    <tr>
+        <th>ID</th>
+        <td>{{book.id}}</td>
+    </tr>
+    <tr>
+        <th>Title</th>
+        <td>{{book.title}}</td>
+    </tr>
+    <tr>
+        <th>Author</th>
+        <td>{{book.author}}</td>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <td>{{book.price}}</td>
+    <tr>
+    <tr>
+        <th>Edition</th>
+        <td>{{book.edition}}</td>
+    </tr>
+</table>
+<h3>enter new book detalis below</h3>
+<form method="POST" action="{% url 'books.l9p1t3' Id=book.id%}">
+    {% csrf_token %}
+    <label for="title">Book Title:</label>
+    <input type="text" id="title" name="title"><br><br>
+  
+    <label for="author">Author Name:</label>
+    <input type="text" id="author" name="author"><br><br>
+    
+    <label for="float">Price:</label>
+    <input type="number" step="0.01" id="float" name="price"><br><br>
+    
+    <label for="integer">Edition:</label>
+    <input type="number" id="integer" name="edition"><br><br>
+  
+    <button type="submit">update Book</button>
+</form>
+{% endblock%}
+</body>
