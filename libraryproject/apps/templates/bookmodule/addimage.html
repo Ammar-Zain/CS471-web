@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} add image {% endblock title %}
+</head>
+<body>
+{% block content %}
+    <h1>Adding New Image</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save</button>
+    </form>
+{% endblock %}
+</body>
+</html>

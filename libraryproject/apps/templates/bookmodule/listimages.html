@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} image listing {% endblock title %}
+{% block stylesheets %} <link rel="stylesheet" href="{% static 'lab9-10_style.css' %}"> {% endblock %}
+</head>
+<body>
+  {% block content %}
+  <a href="{% url 'addimage' %}" class="linkadd"> <h1>Add New Image</h1></a>
+  <ul>
+    {% for image in images %}
+    <h2>{{ image.title }}</h2>
+    <p>description: {{ image.description }}</p>
+    <img src="{{ image.image.url }}" alt="{{ image.title }}" width="500">
+    <br> <br>
+        <a href="{% url 'editimage' Id=image.id %}" class="linkedit">Edit</a>
+        <a href="{% url 'deleteimage' Id=image.id %}" class="linkdelete">Delete</a>
+    {% endfor %}
+  </ul>
+{% endblock %}
+</body>
+</html>

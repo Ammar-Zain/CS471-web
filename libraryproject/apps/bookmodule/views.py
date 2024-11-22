@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
-from .models import Book, Student, address
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import *
 from django.db.models import Q, Sum, Avg, Max, Min, Count
-from .forms import BookForm
+from .forms import *
 
 def index(request):
  return render(request, "bookmodule/index.html")
@@ -48,11 +48,11 @@ def simple_query(request):
     return render(request,'bookmodule/bookList.html', {"books":mybooks})
 
 def lookup_query(request):
-    mybooks=Book.objects.filter(author__isnull=False).filter(title__icontains='and').exclude(price__lte=100.00) [:10]
-    if len(mybooks) >=1:
-        return render(request,'bookmodule./bookList.html',{'books':mybooks})
-    else:
-        return render(request,"bookmodule/index.html")
+  mybooks=Book.objects.filter(author__isnull=False).filter(title__icontains='and').exclude(price__lte=100.00) [:10]
+  if len(mybooks) >=1:
+    return render(request,'bookmodule./bookList.html',{'books':mybooks})
+  else:
+    return render(request,"bookmodule/index.html")
 
 def __getBooksList():
  book1 = {'id':12344321, 'title':'Continuous Delivery', 'author':'J.Humble and D. Farley'}
@@ -83,7 +83,7 @@ def task5(request):
   return render(request,'bookmodule/aggergatequery.html',{'title':'the number of books, total price of all books, average price, maximum price, and minimum price','NoB':NoB,'query':query})
 
 def task7(request):
-  cities = (address.objects.annotate(student_count=Count('student')).values('address', 'student_count'))  
+  cities = (Address.objects.annotate(student_count=Count('student')).values('address', 'student_count'))  
   return render(request, 'bookmodule/listStudent.html', {'cities':cities})
 
 def singleBook(request, Id):
@@ -130,27 +130,117 @@ def listbooks_django(request):
   return render(request,'bookmodule/listBooks_django.html', {'books':mybook})
 
 def addbook_django(request):
-    if request.method == 'POST':
-        form = BookForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('books.l9p2t1')
-    else:
-        form = BookForm()
-    return render(request, 'bookmodule/addBook_django.html', {'form': form})
+  if request.method == 'POST':
+    form = BookForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('books.l9p2t1')
+  else:
+    form = BookForm()
+  return render(request, 'bookmodule/addBook_django.html', {'form': form})
 
 def editbook_django(request, Id):
-    mybook = Book.objects.get(id=Id)
-    if request.method == 'POST':
-        form = BookForm(request.POST, instance=mybook)
-        if form.is_valid():
-            form.save()
-            return redirect('books.l9p2t1')
-    else:
-        form = BookForm(instance=mybook)
-    return render(request, 'bookmodule/editbook_django.html', {'form': form})
+  mybook = Book.objects.get(id=Id)
+  if request.method == 'POST':
+    form = BookForm(request.POST, instance=mybook)
+    if form.is_valid():
+      form.save()
+      return redirect('books.l9p2t1')
+  else:
+    form = BookForm(instance=mybook)
+  return render(request, 'bookmodule/editbook_django.html', {'form': form})
 
 def deleteBook_django(request, Id):
   mybook = Book.objects.get(id=Id)
   mybook.delete()
   return redirect('books.l9p2t1')
+
+def liststudent1t1(request):
+  students = Student.objects.select_related('address').all()
+  return render(request,"bookmodule/liststudent1t1.html",{'students':students})
+
+def addstudent1t1(request):
+  if request.method == 'POST':
+    form = StudentForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('listsutedent1t1')
+  else:
+    form = StudentForm()
+  return render(request,"bookmodule/addstudent1t1.html", {'form':form})
+
+def updatestudent1t1(request,Id):
+  student = Student.objects.select_related('address').get(id=Id)
+  if request.method == 'POST':
+    form = StudentForm(request.POST, instance=student)
+    if form.is_valid():
+      form.save()
+      return redirect('listsutedent1t1')
+  else:
+    form = StudentForm(instance=student)
+  return render(request,"bookmodule/updatestudent1t1.html",{'form':form})
+
+def deletestudent1t1(request,Id):
+  student = Student.objects.select_related('address').get(id=Id)
+  student.delete()
+  return redirect('listsutedent1t1')
+
+def liststudentmtm(request):
+  students = Student2.objects.prefetch_related('addresses').all()
+  return render(request,"bookmodule/liststudentmtm.html",{'students':students})
+
+def addstudentmtm(request):
+  if request.method == 'POST':
+    form = StudentForm2(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('liststudentmtm')
+  else:
+    form = StudentForm2()
+  return render(request,"bookmodule/addstudentmtm.html",{'form':form})
+
+def updatestudentmtm(request, Id):
+  student = Student2.objects.prefetch_related('addresses').get(id=Id)
+  if request.method == 'POST':
+    form = StudentForm2(request.POST, instance=student)
+    if form.is_valid():
+      form.save()
+      return redirect('liststudentmtm')
+  else: 
+    form = StudentForm2(instance=student)
+  return render(request,"bookmodule/updatestudentmtm.html", {'form':form})
+
+def deletestudentmtm(request, Id):
+  student = Student2.objects.prefetch_related('addresses').get(id=Id)
+  student.delete()
+  return redirect('liststudentmtm')
+
+def listimages(request):
+  images = ImageEntry.objects.all()
+  return render(request, 'bookmodule/listimages.html', {'images': images})
+
+def addimage(request):
+  if request.method == 'POST':
+    form = ImageEntryForm(request.POST, request.FILES)
+    if form.is_valid():
+      form.save()
+      return redirect('listimages')
+  else:
+      form = ImageEntryForm()
+  return render(request, 'bookmodule/addimage.html', {'form': form})
+
+def editimage(request, Id):
+  image_entry = get_object_or_404(ImageEntry, id=Id)
+  if request.method == 'POST':
+    form = ImageEntryForm(request.POST, request.FILES, instance=image_entry)
+    if form.is_valid():
+      form.save()
+      return redirect('listimages')
+  else:
+    form = ImageEntryForm(instance=image_entry)
+  return render(request, 'bookmodule/editimage.html', {'form': form})
+
+def deleteimage(request, Id):
+  image_entry = get_object_or_404(ImageEntry, id=Id)
+  image_entry.delete()
+  return redirect('listimages')
