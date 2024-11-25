@@ -15,6 +15,13 @@
 <body>
  
  {% include "includes/header.html" %}
+ {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
  {% block content %} {% endblock content %}
  {% include "includes/footer.html" %}
 </body>

@@ -3,5 +3,8 @@
  <a class="{% if url_name == 'books.index' %}active{% endif %}" href="{% url 'books.index' %}">Home</a>
  <a class="{% if url_name == 'books.list_books' %}active{% endif %}" href="{% url 'books.list_books' %}">List Books</a>
  <a class="{% if url_name == 'books.aboutus' %}active{% endif %}" href="{% url 'books.aboutus' %}">About</a>
+ <a class="{% if url_name == 'user.register' %} active {% endif %}" href="{% url 'user.register' %}"> register</a>
+ <a class="{% if url_name == 'user.login' %} active {% endif %}" href="{% url 'user.login' %}"> login</a> 
+ <a href="{% url 'user.logout' %}"> logout</a>
 </div>
 {% endwith %}
