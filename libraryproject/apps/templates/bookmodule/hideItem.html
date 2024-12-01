@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} hide Item with js {% endblock title %}
+</head>
+<body>
+{% block content %}
+<button onclick="hideItem()">hide Item</button>
+<div id="myDiv" style="width: 200px; height: 100px; border: 1px solid black; margin-top: 10px;">
+    This is a div element.
+</div>
+{% endblock %}
+</body>
+{% block javascript %} 
+<script>
+    function hideItem() {
+        var myDiv = document.getElementById('myDiv');
+        if(myDiv.style.display === 'none') {
+            myDiv.style.display = 'block';
+        }else {
+            myDiv.style.display = 'none'
+        }
+    }
+</script>
+{% endblock javascript %}
+</html>

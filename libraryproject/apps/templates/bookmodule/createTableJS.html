@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} create table with js {% endblock title %}
+</head>
+<body>
+{% block content %}
+<button onclick="createTable()">create table</button>
+<div>
+    <table id="myTb" style="border: 1px solid;"></table>
+</div>
+{% endblock %}
+</body>
+{% block javascript %} 
+<script>
+    function createTable() {
+        var myTb = document.getElementById('myTb');
+        myTb.innerHTML = ''; // to empty previous table so therer won't be multiple tables
+        for (var i = 0; i < 4; i++) {
+            var tr = document.createElement('tr');
+            for (var j = 0; j < 3; j++) {
+                var td = document.createElement('td');
+                td.append('data ' + (i * 2 + j + 1));
+                tr.appendChild(td);
+                td.style.border = '1px solid';
+            }
+            myTb.appendChild(tr);
+        }
+
+    }
+</script>
+{% endblock javascript %}
+</html>

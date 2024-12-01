@@ -40,4 +40,10 @@ urlpatterns = [
     path('images/add/', views.addimage, name='addimage'),
     path('images/edit/<int:Id>/', views.editimage, name='editimage'),
     path('images/delete/<int:Id>/', views.deleteimage, name='deleteimage'),
+    path('lab12/task1/', views.changeColorJS, name="books.lab12.task1"),
+    path('lab12/task2/', views.addItemJS, name="books.lab12.task2"),
+    path('lab12/task3/', views.hideItemJS, name="books.lab12.task3"),
+    path('lab12/task4/', views.hoverItemJS, name="books.lab12.task4"),
+    path('lab12/task5/', views.createTableJS, name="books.lab12.task5"),
+    
 ]

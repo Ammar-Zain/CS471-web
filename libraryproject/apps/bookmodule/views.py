@@ -244,3 +244,18 @@ def deleteimage(request, Id):
   image_entry = get_object_or_404(ImageEntry, id=Id)
   image_entry.delete()
   return redirect('listimages')
+
+def changeColorJS(request):
+  return render(request, 'bookmodule/changeColorJS.html')
+
+def addItemJS(request):
+  return render(request, 'bookmodule/addItemJS.html')
+
+def hideItemJS(request):
+  return render(request, 'bookmodule/hideItem.html')
+
+def hoverItemJS(request):
+  return render(request, 'bookmodule/hoverItem.html')
+
+def createTableJS(request):
+  return render(request, 'bookmodule/createTableJS.html')

@@ -1,0 +1,29 @@
+
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Add Item to List with js {% endblock title %}
+</head>
+<body>
+{% block content %}
+<button onclick="addItem()">Add Item</button>
+<ul id="myList">
+    <li>Item 1</li>
+    <li>Item 2</li>
+</ul>
+{% endblock %}
+</body>
+{% block javascript %} 
+<script>
+    n = 3
+    function addItem() {
+        var ul = document.getElementById("myList");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode("Item " + n));
+        ul.appendChild(li);
+        n+=1;
+    }
+</script>
+{% endblock javascript %}
+</html>

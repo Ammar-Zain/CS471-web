@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} hover actions with js {% endblock title %}
+</head>
+<body>
+{% block content %}
+<div onmouseenter="hoverItem()" id="myDiv" style="width: 400px; height: 100px; border: 1px solid black; margin-top: 10px; background-color: lightblue;">
+    This is a div element.
+</div>
+{% endblock %}
+</body>
+{% block javascript %} 
+<script>
+    function hoverItem() {
+        var myDiv = document.getElementById('myDiv');
+        if(myDiv.style.backgroundColor === 'lightblue') {
+            myDiv.style.backgroundColor = 'red';
+            myDiv.style.fontSize = '40px'
+        } else {
+            myDiv.style.backgroundColor = 'lightblue'
+            myDiv.style.fontSize = '20px'
+        }
+    }
+</script>
+{% endblock javascript %}
+</html>
